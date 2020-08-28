@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <title>Migrationless Views</title>
+    <authors>Steven Laughton</authors>
+    <description>Create and use views without having to migrate them onto the database</description>
   </PropertyGroup>
 
   <ItemGroup>
