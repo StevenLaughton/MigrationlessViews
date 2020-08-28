@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$0.01$</version>
+    <title>$MigrationlessViews$</title>
+    <authors>$Steven Laughton$</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$Create and use views without having to migrate them onto the database$</description>
+    <releaseNotes>Not Released</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>Tag1 Tag2</tags>
+  </metadata>
+</package>
