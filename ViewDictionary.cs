@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace EfCoreViews.Infrastructure
+namespace MigrationlessViews
 {
     public class ViewDictionary
     {
         public Dictionary<string, string> Views { get; set; }
+
         public ViewDictionary()
         {
             Views = new Dictionary<string, string>();

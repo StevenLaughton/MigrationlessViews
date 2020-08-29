@@ -1,7 +1,6 @@
-using EfCoreViews.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MigrationlessViews
+namespace MigrationlessViews.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -9,6 +8,7 @@ namespace MigrationlessViews
         public static void AddDbViews(this IServiceCollection services)
         {
             services.AddSingleton<ViewDictionary>();
+            services.AddScoped<DbViewProvider>();
         }
     }
 }
