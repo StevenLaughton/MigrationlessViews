@@ -6,6 +6,8 @@ The idea behind the project is to be able to create views without having to add 
 
 This will enable views to be used in unit tests without mocking. 
 
+The package is available from [nuget](https://www.nuget.org/packages/MigrationlessViews/)
+
 ## Configuring the views
 
 To use the migrationless views you will need to include the project on the service collection during startup
