@@ -8,10 +8,10 @@ namespace MigrationlessViews.Extensions
         /// 
         /// </summary>
         /// <param name="services"></param>
-        public static void AddDbViews(this IServiceCollection services)
+        public static IServiceCollection AddDbViews(this IServiceCollection services)
         {
-            services.AddSingleton<ViewDictionary>();
-            services.AddScoped<DbViewProvider>();
+            return services.AddSingleton<ViewDictionary>()
+                        .AddScoped<DbViewProvider>();
         }
     }
 }

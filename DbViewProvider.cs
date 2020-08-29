@@ -34,10 +34,20 @@ namespace MigrationlessViews
                 .GetTypes()
                 .Where(x => x.BaseType?.Name == "DbContext").FirstOrDefault();
 
+            Console.WriteLine("The context name is ");
+            Console.WriteLine(contextName);
+
             var dbContext = (DbContext)_services.GetRequiredService(contextName)
              ?? throw new NotImplementedException();
+
+            Console.WriteLine("The dbcontext is ");
+            Console.WriteLine(contextName);
+
             var sqlDictionary = (ViewDictionary)_services.GetRequiredService(typeof(ViewDictionary))
                 ?? throw new NotImplementedException();
+
+            Console.WriteLine("The sqlDictionary is ");
+            Console.WriteLine(contextName);
 
             return dbContext.Set<TView>().FromSqlRaw(sqlDictionary.GetSqlString(typeof(TView).Name));
         }
