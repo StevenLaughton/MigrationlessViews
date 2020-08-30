@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationlessViews", "MigrationlessViews.csproj", "{6C1677FA-1AC6-4AA9-B82A-2E69F284D110}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C1677FA-1AC6-4AA9-B82A-2E69F284D110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1677FA-1AC6-4AA9-B82A-2E69F284D110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1677FA-1AC6-4AA9-B82A-2E69F284D110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1677FA-1AC6-4AA9-B82A-2E69F284D110}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

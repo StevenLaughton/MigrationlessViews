@@ -34,6 +34,8 @@ namespace MigrationlessViews
                 .GetTypes()
                 .Where(x => x.BaseType?.Name == "DbContext").FirstOrDefault();
 
+            Console.WriteLine(Assembly.GetExecutingAssembly());
+
             Console.WriteLine("The context name is ");
             Console.WriteLine(contextName);
 
