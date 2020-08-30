@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MigrationlessViews.Extensions;
 using MigrationlessViews.Interfaces;
+using System;
 using System.Linq;
 
 
@@ -32,6 +34,21 @@ namespace MigrationlessViews
             where TView : class, IView
         {
             return _context.Set<TView>().FromSqlRaw(_viewDictionary.GetSqlString(typeof(TView).Name));
+        }
+    }
+
+    public static class DbViewProvider2
+    {
+        public static IServiceProvider ServiceProvider { get; }
+
+        public static IQueryable<TView> DbView2<TView>(this DbContext context)
+            where TView : class, IView
+        {
+
+            var sqlDictionary = (ViewDictionary)ServiceProvider.GetService(typeof(ViewDictionary))
+                ?? throw new NotImplementedException();
+
+            return context.Set<TView>().FromSqlRaw(sqlDictionary.GetSqlString(typeof(TView).Name));
         }
     }
 }
