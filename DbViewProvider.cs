@@ -1,21 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MigrationlessViews.Extensions;
 using MigrationlessViews.Interfaces;
-using System;
 using System.Linq;
-using System.Reflection;
+
 
 namespace MigrationlessViews
 {
-    public class DbViewProvider
+    public class DbViewProvider<TContext> where TContext : DbContext
     {
 
         private readonly ViewDictionary _viewDictionary;
         private readonly DbContext _context;
 
         public DbViewProvider(ViewDictionary viewDictionary,
-            DbContext dbContext
+            TContext dbContext
         )
         {
             _viewDictionary = viewDictionary;
