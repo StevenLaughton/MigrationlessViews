@@ -13,8 +13,7 @@ namespace MigrationlessViews
         private readonly DbContext _context;
 
         public DbViewProvider(ViewDictionary viewDictionary,
-            TContext dbContext
-        )
+            TContext dbContext)
         {
             _viewDictionary = viewDictionary;
             _context = dbContext;
@@ -32,7 +31,6 @@ namespace MigrationlessViews
         public IQueryable<TView> DbView<TView>()
             where TView : class, IView
         {
-
             return _context.Set<TView>().FromSqlRaw(_viewDictionary.GetSqlString(typeof(TView).Name));
         }
     }

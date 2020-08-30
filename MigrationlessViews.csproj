@@ -6,7 +6,7 @@
     <authors>Steven Laughton</authors>
     <description>Create and use views without having to migrate them onto the database</description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.25</Version>
+    <Version>1.0.26</Version>
   </PropertyGroup>
 
   <ItemGroup>

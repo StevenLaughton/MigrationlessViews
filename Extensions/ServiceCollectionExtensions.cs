@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MigrationlessViews.Extensions
@@ -8,10 +9,10 @@ namespace MigrationlessViews.Extensions
         /// 
         /// </summary>
         /// <param name="services"></param>
-        public static IServiceCollection AddDbViews(this IServiceCollection services)
+        public static IServiceCollection AddDbViews<TContext>(this IServiceCollection services) where TContext : DbContext
         {
             return services.AddSingleton<ViewDictionary>()
-                        .AddScoped<DbViewProvider>();
+                        .AddScoped<DbViewProvider<TContext>>();
         }
     }
 }
