@@ -11,11 +11,15 @@ namespace MigrationlessViews
     public class DbViewProvider
     {
 
-        private readonly IServiceProvider _services;
+        private readonly ViewDictionary _viewDictionary;
+        private readonly DbContext _context;
 
-        public DbViewProvider(IServiceProvider services)
+        public DbViewProvider(ViewDictionary viewDictionary,
+            DbContext dbContext
+        )
         {
-            _services = services;
+            _viewDictionary = viewDictionary;
+            _context = dbContext;
         }
 
 
@@ -30,28 +34,8 @@ namespace MigrationlessViews
         public IQueryable<TView> DbView<TView>()
             where TView : class, IView
         {
-            var contextName = Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(x => x.BaseType?.Name == "DbContext").FirstOrDefault();
 
-            Console.WriteLine(Assembly.GetExecutingAssembly());
-
-            Console.WriteLine("The context name is ");
-            Console.WriteLine(contextName);
-
-            var dbContext = (DbContext)_services.GetRequiredService(contextName)
-             ?? throw new NotImplementedException();
-
-            Console.WriteLine("The dbcontext is ");
-            Console.WriteLine(contextName);
-
-            var sqlDictionary = (ViewDictionary)_services.GetRequiredService(typeof(ViewDictionary))
-                ?? throw new NotImplementedException();
-
-            Console.WriteLine("The sqlDictionary is ");
-            Console.WriteLine(contextName);
-
-            return dbContext.Set<TView>().FromSqlRaw(sqlDictionary.GetSqlString(typeof(TView).Name));
+            return _context.Set<TView>().FromSqlRaw(_viewDictionary.GetSqlString(typeof(TView).Name));
         }
     }
 }
