@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using MigrationlessViews.Classes;
 using MigrationlessViews.Extensions;
-using MigrationlessViews.Interfaces;
-using System;
 using System.Linq;
 
 
@@ -18,7 +17,7 @@ namespace MigrationlessViews
         /// <typeparam name="TView"></typeparam>
         /// <returns></returns>
         public static IQueryable<TView> DbView<TView>(this DbContext context, ViewDictionary viewDictionary)
-            where TView : class, IView
+            where TView : View
         {
             return context.Set<TView>().FromSqlRaw(viewDictionary.GetSqlString(typeof(TView).Name));
         }

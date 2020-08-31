@@ -1,10 +1,10 @@
 # MigrationlessViews
 
-Run Dotnet Core views without them being migrated to the database. 
+Run Dotnet Core views without them being migrated to the database.
 
-The idea behind the project is to be able to create views without having to add them to the database through migrations. This will make maintaining views faster and easier. This style of doing views will mean that the Sql files will be in source control. 
+The idea behind the project is to be able to create views without having to add them to the database through migrations. This will make maintaining views faster and easier. This style of doing views will mean that the Sql files will be in source control.
 
-This will enable views to be used in unit tests without mocking. 
+This will enable views to be used in unit tests without mocking.
 
 The package is available from [nuget](https://www.nuget.org/packages/MigrationlessViews/)
 
@@ -16,28 +16,28 @@ To use the migrationless views you will need to include the project on the servi
 services.AddDbViews();
 ```
 
-The database view provider will need to be injected into the database context.
+The view dictionary needs to be injected into the database context.
 
 ```
     public class DemoContext : DbContext
     {
-        public readonly DbViewProvider _viewProvider;
+        private readonly ViewDictionary _viewDictionary;
 
-        public DemoContext(DbContextOptions<DemoContext> options, DbViewProvider viewProvider)
+        public DemoContext(DbContextOptions<DemoContext> options, ViewDictionary viewDictionary)
                 : base(options)
         {
-            _viewProvider = viewProvider;
+            _viewDictionary = viewDictionary;
         }
 ```
 
-This will allow views to be used on the database.
+This provides the context with the Sql scripts to execute.
 
 ## How to set up a view
 
-The first thing to do when setting up a view is to create a class which inherits `IView`. For this example I have created a view to merge two entities (couldnt think if a better example to this).
+The first thing to do when setting up a view is to create a class which inherits `View`. For this example I have created a view to merge two entities (couldnt think if a better example to this).
 
 ```
-    public class UserHairColour : IView
+    public class UserHairColour : View
     {
         public string FirstName { get; set; }
 
@@ -49,24 +49,10 @@ The first thing to do when setting up a view is to create a class which inherits
 
 This class needs to match the output of the view.
 
-Create a configuration for the entity which sets the value as `HasNoKey()`. This will stop the migration builder from creating a table for the views.
+On the database context. Add the entity, and initialise by adding the view onto the context and passing in the view dictionary instance.
 
 ```
-    public class UserHairColourConfig : IEntityTypeConfiguration<UserHairColour>
-    {
-        public void Configure(EntityTypeBuilder<UserHairColour> builder)
-        {
-            builder.HasNoKey();
-        }
-    }
-```
-
-NOTE: In future versions i'm hoping to remove the need for adding this per entity.
-
-On the database context. Add the entity, and initialise the view with the view provider.
-
-```
-        public IQueryable<UserHairColour> UserHairColours => _viewProvider.DbView<UserHairColour>();
+        public IQueryable<UserHairColour> UserHairColours => this.DbView<UserHairColour>(viewDictionary);
 
 ```
 
