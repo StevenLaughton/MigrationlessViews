@@ -9,10 +9,9 @@ namespace MigrationlessViews.Extensions
         /// 
         /// </summary>
         /// <param name="services"></param>
-        public static IServiceCollection AddDbViews<TContext>(this IServiceCollection services) where TContext : DbContext
+        public static IServiceCollection AddDbViews(this IServiceCollection services)
         {
-            return services.AddSingleton<ViewDictionary>()
-                        .AddScoped<DbViewProvider<TContext>>();
+            return services.AddSingleton<ViewDictionary>();
         }
     }
 }
